@@ -35,6 +35,7 @@
     "electron-builder": "22.14.5",
     "electron-devtools-installer": "3.2.0",
     "eslint": "8.7.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "8.3.0",
     "happy-dom": "2.27.0",
     "nano-staged": "0.5.0",
@@ -47,6 +48,7 @@
   },
   "dependencies": {
     "electron-updater": "4.6.5",
-    "vue": "3.2.27"
+    "vue": "3.2.27",
+    "vue-router": "^4.0.10"
   }
 }

@@ -7,16 +7,15 @@
     "skipLibCheck": true,
     "strict": true,
     "isolatedModules": true,
+    "noImplicitAny": false,
 
     // Don't automatically include anything.
     // Only include `@types` packages that we need to import.
-    "types" : [],
+    "types": [],
 
     "baseUrl": ".",
     "paths": {
-      "/@/*": [
-        "./src/*"
-      ]
+      "/@/*": ["./src/*"]
     },
     "lib": ["ESNext", "dom", "dom.iterable"]
   },
@@ -29,8 +28,5 @@
     "../../types/**/*.d.ts",
     "../preload/exposedInMainWorld.d.ts"
   ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts",
-  ]
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
 }
