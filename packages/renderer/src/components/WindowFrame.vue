@@ -1,16 +1,5 @@
 <template>
-  <header id="topBar">
-    <div id="title-bar-btns">
-      <button id="min-btn">-</button>
-      <button id="max-btn">+</button>
-      <button id="close-btn">x</button>
-    </div>
-    Topbar
-  </header>
   <slot />
-  <div id="bottomBar">
-    <footer-component platform="win">Hello</footer-component>
-  </div>
 </template>
 
 <script setup lang="ts"></script>

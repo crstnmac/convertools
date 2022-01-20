@@ -8,18 +8,12 @@
         :show-title="showTitle"
         :show-icon="showIcon"
         :menu="menu"
-        :on-close="closeWindow"
-        :on-maximize="toggleMaximizeWindow"
-        :on-minimize="minimizeWindow"
         :is-closable="isClosable"
         :is-maximizable="isMaximizable"
         :is-minimizable="isMinimizable"
       >
         <template v-slot:icon>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
             <path
               fill="currentColor"
               d="M437.2 403.5L320 215V64h8c13.3 0 24-10.7 24-24V24c0-13.3-10.7-24-24-24H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h8v151L10.8 403.5C-18.5 450.6 15.3 512 70.9 512h306.2c55.7 0 89.4-61.5 60.1-108.5zM137.9 320l48.2-77.6c3.7-5.2 5.8-11.6 5.8-18.4V64h64v160c0 6.9 2.2 13.2 5.8 18.4l48.2 77.6h-172z"
@@ -49,28 +43,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
-import { useElectron } from "./use/electron"
-import AppNavigation from "/@/components/AppNavigation.vue"
-import TitleBar from "/@/components/TitleBar.vue"
-import BottomBar from "/@/components/FooterComponent.vue"
+import { defineComponent } from "vue";
+import { useElectron } from "./use/electron";
+import AppNavigation from "/@/components/AppNavigation.vue";
+import TitleBar from "/@/components/TitleBar.vue";
+import BottomBar from "/@/components/FooterComponent.vue";
 
-const {
-  maximize,
-  minimize,
-  isMinimizable,
-  isMaximizable,
-  close,
-  isClosable,
-  devtools
-} = useElectron()
+const { isMinimizable, isMaximizable, isClosable } = useElectron();
 
 export default defineComponent({
   name: "App",
   components: {
     AppNavigation,
     TitleBar,
-    BottomBar
+    BottomBar,
   },
   data() {
     return {
@@ -84,33 +70,21 @@ export default defineComponent({
 
       isClosable: isClosable,
       menu: [
-        {
-          label: "DevTools",
+        // {
+        //   label: "DevTools",
 
-          click: devtools,
-        },
+        //   click: devtools,
+        // },
         {
           label: "About",
           click: function () {
-            console.log("Pressed item 2")
+            console.log("Pressed item 2");
           },
         },
       ],
-    }
+    };
   },
-
-  methods: {
-    closeWindow(): void {
-      close()
-    },
-    toggleMaximizeWindow(): void {
-      maximize()
-    },
-    minimizeWindow(): void {
-      minimize()
-    }
-  }
-})
+});
 </script>
 
 <style type="css">

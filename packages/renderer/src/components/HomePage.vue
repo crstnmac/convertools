@@ -6,7 +6,7 @@
 
   <div class="content">
     <div class="box shadow w-full">
-      <h1>Hello</h1>
+      <h1>{{ count }}</h1>
     </div>
     <div class="space-v" />
     <div class="box shadow w-full">
@@ -24,7 +24,7 @@ export default defineComponent({
     const count = ref(0);
 
     return { count };
-  }
+  },
 });
 </script>
 

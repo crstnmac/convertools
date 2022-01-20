@@ -27,7 +27,7 @@ async function createWindow() {
     browserWindow?.show();
 
     if (import.meta.env.DEV) {
-      browserWindow?.webContents.openDevTools();
+      browserWindow?.webContents.openDevTools({ mode: "detach" });
     }
   });
 
@@ -47,7 +47,9 @@ async function createWindow() {
 
   ipcMain.on("is-closable", () => browserWindow?.isClosable());
 
-  ipcMain.on("open-devtools", () => browserWindow?.webContents.openDevTools());
+  // ipcMain.on("open-devtools", () => {
+  //   browserWindow?.webContents.openDevTools();
+  // });
 
   /**
    * URL for main window.

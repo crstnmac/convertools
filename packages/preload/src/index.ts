@@ -2,8 +2,8 @@
  * @module preload
  */
 
-import { contextBridge, ipcRenderer } from 'electron';
-import { sha256sum } from '/@/sha256sum';
+import { contextBridge, ipcRenderer } from "electron";
+import { sha256sum } from "/@/sha256sum";
 
 /**
  * The "Main World" is the JavaScript context that your main renderer code runs in.
@@ -26,39 +26,39 @@ import { sha256sum } from '/@/sha256sum';
  * @example
  * console.log( window.versions )
  */
-contextBridge.exposeInMainWorld('versions', process.versions);
+contextBridge.exposeInMainWorld("versions", process.versions);
 
 /**
  * Safe expose node.js API
  * @example
  * window.nodeCrypto('data')
  */
-contextBridge.exposeInMainWorld('nodeCrypto', { sha256sum });
+contextBridge.exposeInMainWorld("nodeCrypto", { sha256sum });
 
-const apiKey = 'electron';
+const apiKey = "electron";
 
 const api = {
   versions: process.versions,
   maximize: () => {
-    ipcRenderer.send('toggle-maximize');
+    ipcRenderer.send("toggle-maximize");
   },
   minimize: () => {
-    ipcRenderer.send('minimize');
+    ipcRenderer.send("minimize");
   },
   close: () => {
-    ipcRenderer.send('close');
+    ipcRenderer.send("close");
   },
   isMinimizable: () => {
-    return ipcRenderer.sendSync('is-minimizable');
+    return ipcRenderer.sendSync("is-minimizable");
   },
   isMaximizable: () => {
-    return ipcRenderer.sendSync('is-maximizable');
+    return ipcRenderer.sendSync("is-maximizable");
   },
   isClosable: () => {
-    return ipcRenderer.sendSync('is-closable');
+    return ipcRenderer.sendSync("is-closable");
   },
   devtools: () => {
-    ipcRenderer.sendSync('open-devtools');
+    ipcRenderer.send("open-devtools");
   },
 };
 

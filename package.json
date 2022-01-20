@@ -35,6 +35,7 @@
     "electron-builder": "22.14.5",
     "electron-devtools-installer": "3.2.0",
     "eslint": "8.7.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "8.3.0",
     "happy-dom": "2.27.0",

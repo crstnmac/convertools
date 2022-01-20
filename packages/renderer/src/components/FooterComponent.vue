@@ -1,3 +1,48 @@
+<template>
+  <div class="footer" :class="[styleClass, stylePlatform]">
+    <div class="footer-resize-handle bottom" />
+    <div class="footer-resize-handle right" />
+    <div class="footer-resize-handle left" />
+
+    <div class="footer-header">
+      <div v-if="showTitle" class="footer-name">Made with ❤️ by crstnmac</div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  props: {
+    theme: {
+      type: String,
+      default: "light",
+    },
+    platform: {
+      type: String,
+      required: true,
+    },
+
+    showIcon: {
+      type: Boolean,
+      default: true,
+    },
+    showTitle: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  setup(props) {
+    const styleClass = `footer-style-${props.theme}`;
+    const stylePlatform = `footer-platform-${props.platform}`;
+    return {
+      styleClass,
+      stylePlatform,
+    };
+  },
+});
+</script>
 <style lang="css">
 .footer {
   position: relative;
@@ -177,56 +222,3 @@
   visibility: visible;
 }
 </style>
-<template>
-  <div
-    class="footer"
-    :class="[styleClass, stylePlatform]"
-  >
-    <div class="footer-resize-handle bottom" />
-    <div class="footer-resize-handle right" />
-    <div class="footer-resize-handle left" />
-
-    <div class="footer-header">
-      <div
-        v-if="showTitle"
-        class="footer-name"
-      >
-        Made with ❤️ by crstnmac
-      </div>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  props: {
-    theme: {
-      type: String,
-      default: "light"
-    },
-    platform: {
-      type: String,
-      required: true
-    },
-
-    showIcon: {
-      type: Boolean,
-      default: true
-    },
-    showTitle: {
-      type: Boolean,
-      default: true
-    }
-  },
-  setup(props) {
-    const styleClass = `footer-style-${props.theme}`;
-    const stylePlatform = `footer-platform-${props.platform}`;
-    return {
-      styleClass,
-      stylePlatform
-    };
-  }
-});
-</script>

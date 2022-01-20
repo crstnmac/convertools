@@ -1,27 +1,15 @@
-
 <template>
-  <div
-    class="titlebar"
-    :class="[styleClass, stylePlatform]"
-  >
+  <div class="titlebar" :class="[styleClass, stylePlatform]">
     <div class="titlebar-resize-handle top" />
     <div class="titlebar-resize-handle right" />
     <div class="titlebar-resize-handle left" />
-    <div
-      v-if="platform === 'darwin'"
-      class="titlebar-buttons-osx"
-    >
+    <div v-if="platform === 'darwin'" class="titlebar-buttons-osx">
       <div
         v-if="isClosable"
         class="macButton macButtonClose"
         @click="() => onClose"
       >
-        <svg
-          name="TitleBarCloseMac"
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-        >
+        <svg name="TitleBarCloseMac" width="12" height="12" viewBox="0 0 12 12">
           <path
             stroke="#4c0000"
             fill="none"
@@ -61,10 +49,7 @@
           height="12"
           viewBox="0 0 12 12"
         >
-          <g
-            fill="#006500"
-            fill-rule="evenodd"
-          >
+          <g fill="#006500" fill-rule="evenodd">
             <path
               d="M5,3 C5,3 5,6.1325704 5,6.48601043 C5,6.83945045 5.18485201,7 5.49021559,7 L9,7 L9,6 L8,6 L8,5 L7,5 L7,4 L6,4 L6,3 L5,3 Z"
               transform="rotate(180 7 5)"
@@ -78,53 +63,32 @@
     </div>
 
     <div class="titlebar-header">
-      <div
-        v-if="showIcon"
-        class="titlebar-icon"
-      >
+      <div v-if="showIcon" class="titlebar-icon">
         <slot name="icon" />
       </div>
 
-      <div
-        v-if="showTitle"
-        class="titlebar-name"
-      >
+      <div v-if="showTitle" class="titlebar-name">
         <slot name="title" />
       </div>
     </div>
 
-    <div
-      v-if="platform !== 'darwin'"
-      class="titlebar-menu"
-    >
-      <div
-        v-for="item of menu"
-        :key="item"
-        class="titlebar-menu-item"
-      >
+    <div v-if="platform !== 'darwin'" class="titlebar-menu">
+      <div v-for="item of menu" :key="item" class="titlebar-menu-item">
         <button @click="() => item.click()">
           {{ item.label }}
         </button>
       </div>
     </div>
 
-    <div
-      v-if="platform !== 'darwin'"
-      class="titlebar-buttons"
-    >
+    <div v-if="platform !== 'darwin'" class="titlebar-buttons">
       <button
         v-if="isMinimizable"
         aria-label="minimize"
         title="Minimize"
         tabindex="-1"
-        @click="() =>onMinimize"
+        @click="onMinimize"
       >
-        <svg
-          aria-hidden="true"
-          version="1.1"
-          width="10"
-          height="10"
-        >
+        <svg aria-hidden="true" version="1.1" width="10" height="10">
           <path d="M 0,5 10,5 10,6 0,6 Z" />
         </svg>
       </button>
@@ -133,14 +97,9 @@
         aria-label="maximize"
         title="Maximize"
         tabindex="-1"
-        @click="() =>onMaximize"
+        @click="onMaximize"
       >
-        <svg
-          aria-hidden="true"
-          version="1.1"
-          width="10"
-          height="10"
-        >
+        <svg aria-hidden="true" version="1.1" width="10" height="10">
           <path d="M 0,0 0,10 10,10 10,0 Z M 1,1 9,1 9,9 1,9 Z" />
         </svg>
       </button>
@@ -150,14 +109,9 @@
         title="Close"
         tabindex="-1"
         class="close"
-        @click="() =>onClose"
+        @click="onClose"
       >
-        <svg
-          aria-hidden="true"
-          version="1.1"
-          width="10"
-          height="10"
-        >
+        <svg aria-hidden="true" version="1.1" width="10" height="10">
           <path
             d="M 0,0 0,0.7 4.3,5 0,9.3 0,10 0.7,10 5,5.7 9.3,10 10,10 10,9.3 5.7,5 10,0.7 10,0 9.3,0 5,4.3 0.7,0 Z"
           />
@@ -169,59 +123,68 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useElectron } from "../use/electron";
 
 export default defineComponent({
-  setup(props) {
-    const styleClass = `titlebar-style-${props.theme}`;
-    const stylePlatform = `titlebar-platform-${props.platform}`;
-    return {
-      styleClass,
-      stylePlatform
-    };
-  },
   props: {
     theme: {
       type: String,
-      default: "light"
+      default: "light",
     },
     platform: {
       type: String,
-      required: true
+      required: true,
     },
     menu: {
-      type: Array as () => Array<any>,
-      default: () => Array
+      type: Array as () => Array<unknown>,
+      default: () => Array,
     },
     isMinimizable: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isMaximizable: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isClosable: {
       type: Boolean,
-      default: true
-    },
-    onMinimize: {
-      type: Function
-    },
-    onMaximize: {
-      type: Function
-    },
-    onClose: {
-      type: Function
+      default: true,
     },
     showIcon: {
       type: Boolean,
-      default: true
+      default: true,
     },
     showTitle: {
       type: Boolean,
-      default: true
-    }
-  }
+      default: true,
+    },
+  },
+  setup(props) {
+    const { minimize, maximize, close } = useElectron();
+
+    const styleClass = `titlebar-style-${props.theme}`;
+    const stylePlatform = `titlebar-platform-${props.platform}`;
+
+    const onMinimize = (e: Event) => {
+      return minimize(e);
+    };
+
+    const onMaximize = (e: Event) => {
+      return maximize(e);
+    };
+
+    const onClose = (e: Event) => {
+      return close(e);
+    };
+    return {
+      styleClass,
+      stylePlatform,
+      onMinimize,
+      onMaximize,
+      onClose,
+    };
+  },
 });
 </script>
 <style lang="css">
