@@ -10,16 +10,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "AboutPage",
-  setup() {
-    const versions = window.versions;
-    // It makes no sense to make "versions" reactive
-    return { versions };
-  },
-});
+<script setup lang="ts">
+const versions = window.versions;
 </script>
 
 <style scoped>

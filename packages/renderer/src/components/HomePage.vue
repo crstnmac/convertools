@@ -2,32 +2,20 @@
   <div class="box shadow">
     <h1>Hello</h1>
   </div>
-  <div class="space-h" />
+  <div class="space-h"></div>
 
   <div class="content">
     <div class="box shadow w-full">
-      <h1>{{ count }}</h1>
+      <h1>Hellow World</h1>
     </div>
-    <div class="space-v" />
+    <div class="space-v"></div>
     <div class="box shadow w-full">
       <h1>Hello</h1>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-
-export default defineComponent({
-  name: "HomePage",
-  setup() {
-    const count = ref(0);
-
-    return { count };
-  },
-});
-</script>
-
+<script setup lang="ts"></script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content {

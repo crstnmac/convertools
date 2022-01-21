@@ -5,8 +5,8 @@
     "sourceMap": false,
     "moduleResolution": "Node",
     "skipLibCheck": true,
+    "isolatedModules": false,
     "strict": true,
-    "isolatedModules": true,
     "noImplicitAny": false,
 
     // Don't automatically include anything.

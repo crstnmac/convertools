@@ -10,38 +10,29 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  props: {
-    theme: {
-      type: String,
-      default: "light",
-    },
-    platform: {
-      type: String,
-      required: true,
-    },
-
-    showIcon: {
-      type: Boolean,
-      default: true,
-    },
-    showTitle: {
-      type: Boolean,
-      default: true,
-    },
+<script setup lang="ts">
+const props = defineProps({
+  theme: {
+    type: String,
+    default: "light",
   },
-  setup(props) {
-    const styleClass = `footer-style-${props.theme}`;
-    const stylePlatform = `footer-platform-${props.platform}`;
-    return {
-      styleClass,
-      stylePlatform,
-    };
+  platform: {
+    type: String,
+    required: true,
+    default: "",
+  },
+  showIcon: {
+    type: Boolean,
+    default: true,
+  },
+  showTitle: {
+    type: Boolean,
+    default: true,
   },
 });
+
+const styleClass = `footer-style-${props.theme}`;
+const stylePlatform = `footer-platform-${props.platform}`;
 </script>
 <style lang="css">
 .footer {

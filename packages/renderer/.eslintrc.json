@@ -6,7 +6,8 @@
   "extends": [
     /** @see https://eslint.vuejs.org/rules/ */
     "plugin:vue/vue3-recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:vue/base"
   ],
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
@@ -27,6 +28,7 @@
      */
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",
-    "vue/v-slot-style": "off"
+    "vue/v-slot-style": "off",
+    "vue/script-setup-uses-vars": "error"
   }
 }

@@ -121,71 +121,60 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useElectron } from "../use/electron";
 
-export default defineComponent({
-  props: {
-    theme: {
-      type: String,
-      default: "light",
-    },
-    platform: {
-      type: String,
-      required: true,
-    },
-    menu: {
-      type: Array as () => Array<unknown>,
-      default: () => Array,
-    },
-    isMinimizable: {
-      type: Boolean,
-      default: true,
-    },
-    isMaximizable: {
-      type: Boolean,
-      default: true,
-    },
-    isClosable: {
-      type: Boolean,
-      default: true,
-    },
-    showIcon: {
-      type: Boolean,
-      default: true,
-    },
-    showTitle: {
-      type: Boolean,
-      default: true,
-    },
+const props = defineProps({
+  theme: {
+    type: String,
+    required: true,
   },
-  setup(props) {
-    const { minimize, maximize, close } = useElectron();
-
-    const styleClass = `titlebar-style-${props.theme}`;
-    const stylePlatform = `titlebar-platform-${props.platform}`;
-
-    const onMinimize = (e: Event) => {
-      return minimize(e);
-    };
-
-    const onMaximize = (e: Event) => {
-      return maximize(e);
-    };
-
-    const onClose = (e: Event) => {
-      return close(e);
-    };
-    return {
-      styleClass,
-      stylePlatform,
-      onMinimize,
-      onMaximize,
-      onClose,
-    };
+  platform: {
+    type: String,
+    required: true,
+  },
+  menu: {
+    type: Array as () => Array<unknown>,
+    default: () => Array,
+  },
+  isMinimizable: {
+    type: Boolean,
+    default: true,
+  },
+  isMaximizable: {
+    type: Boolean,
+    default: true,
+  },
+  isClosable: {
+    type: Boolean,
+    default: true,
+  },
+  showIcon: {
+    type: Boolean,
+    default: true,
+  },
+  showTitle: {
+    type: Boolean,
+    default: true,
   },
 });
+
+const { minimize, maximize, close } = useElectron();
+
+const styleClass = `titlebar-style-${props.theme}`;
+const stylePlatform = `titlebar-platform-${props.platform}`;
+
+const onMinimize = (e: Event) => {
+  return minimize(e);
+};
+
+const onMaximize = (e: Event) => {
+  return maximize(e);
+};
+
+const onClose = (e: Event) => {
+  return close(e);
+};
 </script>
 <style lang="css">
 .titlebar {

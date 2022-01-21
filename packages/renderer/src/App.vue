@@ -3,14 +3,14 @@
   <div class="container">
     <div class="page-header">
       <title-bar
-        :theme="theme"
-        :platform="platform"
-        :show-title="showTitle"
-        :show-icon="showIcon"
-        :menu="menu"
-        :is-closable="isClosable"
-        :is-maximizable="isMaximizable"
-        :is-minimizable="isMinimizable"
+        :theme="props.theme"
+        :platform="props.platform"
+        :show-title="props.showTitle"
+        :show-icon="props.showIcon"
+        :is-minimizable="props.isMinimizable"
+        :is-maximizable="props.isMaximizable"
+        :is-closable="props.isClosable"
+        :menu="props.menu"
       >
         <template v-slot:icon>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -42,49 +42,32 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useElectron } from "./use/electron";
 import AppNavigation from "/@/components/AppNavigation.vue";
 import TitleBar from "/@/components/TitleBar.vue";
 import BottomBar from "/@/components/FooterComponent.vue";
+import type { AppProps } from "@vue/runtime-core";
 
 const { isMinimizable, isMaximizable, isClosable } = useElectron();
 
-export default defineComponent({
-  name: "App",
-  components: {
-    AppNavigation,
-    TitleBar,
-    BottomBar,
-  },
-  data() {
-    return {
-      platform: "windows",
-      theme: "dark",
-      showTitle: true,
-      showIcon: true,
-      isMaximizable: isMaximizable,
-
-      isMinimizable: isMinimizable,
-
-      isClosable: isClosable,
-      menu: [
-        // {
-        //   label: "DevTools",
-
-        //   click: devtools,
-        // },
-        {
-          label: "About",
-          click: function () {
-            console.log("Pressed item 2");
-          },
-        },
-      ],
-    };
-  },
-});
+const props: AppProps = {
+  platform: "windows",
+  theme: "dark",
+  showTitle: true,
+  showIcon: true,
+  isMaximizable: isMaximizable,
+  isMinimizable: isMinimizable,
+  isClosable: isClosable,
+  menu: [
+    {
+      label: "About",
+      click: function () {
+        console.log("Pressed item 2");
+      },
+    },
+  ],
+};
 </script>
 
 <style type="css">
