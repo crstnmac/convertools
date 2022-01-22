@@ -4,11 +4,7 @@
     <div class="titlebar-resize-handle right" />
     <div class="titlebar-resize-handle left" />
     <div v-if="platform === 'darwin'" class="titlebar-buttons-osx">
-      <div
-        v-if="isClosable"
-        class="macButton macButtonClose"
-        @click="() => onClose"
-      >
+      <div v-if="isClosable" class="macButton macButtonClose" @click="onClose">
         <svg name="TitleBarCloseMac" width="12" height="12" viewBox="0 0 12 12">
           <path
             stroke="#4c0000"
@@ -20,7 +16,7 @@
       <div
         v-if="isMinimizable"
         class="macButton macButtonMinimize"
-        @click="() => onMinimize"
+        @click="onMinimize"
       >
         <svg
           name="TitleBarMinimizeMac"
@@ -41,7 +37,7 @@
       <div
         v-if="isMaximizable"
         class="macButton macButtonMaximize"
-        @click="() => onMaximize"
+        @click="onMaximize"
       >
         <svg
           name="TitleBarMaximizeMac"
@@ -74,7 +70,7 @@
 
     <div v-if="platform !== 'darwin'" class="titlebar-menu">
       <div v-for="item of menu" :key="item" class="titlebar-menu-item">
-        <button @click="() => item.click()">
+        <button @click="item.click()">
           {{ item.label }}
         </button>
       </div>
@@ -164,17 +160,11 @@ const { minimize, maximize, close } = useElectron();
 const styleClass = `titlebar-style-${props.theme}`;
 const stylePlatform = `titlebar-platform-${props.platform}`;
 
-const onMinimize = (e: Event) => {
-  return minimize(e);
-};
+const onMinimize = minimize;
 
-const onMaximize = (e: Event) => {
-  return maximize(e);
-};
+const onMaximize = maximize;
 
-const onClose = (e: Event) => {
-  return close(e);
-};
+const onClose = close;
 </script>
 <style lang="css">
 .titlebar {

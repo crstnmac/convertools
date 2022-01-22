@@ -95,6 +95,11 @@ body {
   padding: 0;
 }
 
+.w-full {
+  width: 100%;
+  height: 100%;
+}
+
 .background-img {
   /* background: url("../assets/img/2.jpg") center/cover;
   background-size: cover;

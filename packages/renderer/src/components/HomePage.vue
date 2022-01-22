@@ -1,16 +1,18 @@
 <template>
-  <div class="box shadow">
-    <h1>Hello</h1>
-  </div>
-  <div class="space-h"></div>
-
-  <div class="content">
-    <div class="box shadow w-full">
-      <h1>Hellow World</h1>
-    </div>
-    <div class="space-v"></div>
-    <div class="box shadow w-full">
+  <div class="w-full">
+    <div class="box shadow">
       <h1>Hello</h1>
+    </div>
+    <div class="space-h"></div>
+
+    <div class="content">
+      <div class="box shadow w-full">
+        <h1>Hellow World</h1>
+      </div>
+      <div class="space-v"></div>
+      <div class="box shadow w-full">
+        <h1>Hello</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -38,11 +40,6 @@
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.5rem;
-}
-
-.w-full {
-  width: 100%;
-  height: 100%;
 }
 
 .shadow {

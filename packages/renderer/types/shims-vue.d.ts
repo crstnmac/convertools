@@ -12,9 +12,20 @@ declare module "@vue/runtime-core" {
     platform: string;
     showTitle: boolean;
     showIcon: boolean;
-    isMaximizable: boolean;
-    isMinimizable: boolean;
-    isClosable: boolean;
+    isMaximizable: () => boolean;
+    isMinimizable: () => boolean;
+    isClosable: () => boolean;
     menu: unknown[];
+  }
+
+  interface ElectronApi {
+    versions: NodeJS.ProcessVersions;
+    maximize: () => void;
+    minimize: () => void;
+    close: () => void;
+    isMinimizable: () => boolean;
+    isMaximizable: () => boolean;
+    isClosable: () => boolean;
+    devtools: () => void;
   }
 }
