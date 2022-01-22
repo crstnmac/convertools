@@ -1,13 +1,13 @@
 {
   "env": {
     "browser": true,
-    "node": false
+    "node": false,
+    "vue/setup-compiler-macros": true
   },
   "extends": [
     /** @see https://eslint.vuejs.org/rules/ */
     "plugin:vue/vue3-recommended",
-    "plugin:prettier/recommended",
-    "plugin:vue/base"
+    "plugin:prettier/recommended"
   ],
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
