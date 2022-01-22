@@ -11,7 +11,7 @@
   ],
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
-    "ecmaVersion": 12,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "rules": {
