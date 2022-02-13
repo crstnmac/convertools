@@ -3,21 +3,25 @@
     "module": "esnext",
     "target": "esnext",
     "sourceMap": false,
+    "jsx": "preserve",
+    "importHelpers": true,
     "moduleResolution": "Node",
     "skipLibCheck": true,
     "isolatedModules": false,
     "strict": true,
     "noImplicitAny": false,
+    "noUnusedLocals": true,
 
     // Don't automatically include anything.
     // Only include `@types` packages that we need to import.
-    "types": [],
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"],
 
     "baseUrl": ".",
     "paths": {
       "/@/*": ["./src/*"]
     },
-    "lib": ["ESNext", "dom", "dom.iterable"]
+    "lib": ["esnext", "dom", "dom.iterable"]
   },
 
   "include": [

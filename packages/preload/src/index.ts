@@ -39,27 +39,13 @@ const apiKey = "electron";
 
 const api = {
   versions: process.versions,
-  maximize: () => {
-    ipcRenderer.send("toggle-maximize");
-  },
-  minimize: () => {
-    ipcRenderer.send("minimize");
-  },
-  close: () => {
-    ipcRenderer.send("close");
-  },
-  isMinimizable: () => {
-    return ipcRenderer.sendSync("is-minimizable");
-  },
-  isMaximizable: () => {
-    return ipcRenderer.sendSync("is-maximizable");
-  },
-  isClosable: () => {
-    return ipcRenderer.sendSync("is-closable");
-  },
-  devtools: () => {
-    ipcRenderer.send("open-devtools");
-  },
+  maximize: () => ipcRenderer.send("toggle-maximize"),
+  minimize: () => ipcRenderer.send("minimize"),
+  close: () => ipcRenderer.send("close"),
+  isMinimizable: () => ipcRenderer.sendSync("is-minimizable"),
+  isMaximizable: () => ipcRenderer.sendSync("is-maximizable"),
+  isClosable: () => ipcRenderer.sendSync("is-closable"),
+  devtools: () => ipcRenderer.send("open-devtools"),
 };
 
 contextBridge.exposeInMainWorld(apiKey, api);

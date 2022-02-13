@@ -4,7 +4,7 @@
     <div class="titlebar-resize-handle right" />
     <div class="titlebar-resize-handle left" />
     <div v-if="platform === 'darwin'" class="titlebar-buttons-osx">
-      <div v-if="isClosable" class="macButton macButtonClose" @click="onClose">
+      <div v-if="closable()" class="macButton macButtonClose" @click="onClose">
         <svg name="TitleBarCloseMac" width="12" height="12" viewBox="0 0 12 12">
           <path
             stroke="#4c0000"
@@ -14,7 +14,7 @@
         </svg>
       </div>
       <div
-        v-if="isMinimizable"
+        v-if="minimizable()"
         class="macButton macButtonMinimize"
         @click="onMinimize"
       >
@@ -35,7 +35,7 @@
         </svg>
       </div>
       <div
-        v-if="isMaximizable"
+        v-if="maximizable()"
         class="macButton macButtonMaximize"
         @click="onMaximize"
       >
@@ -69,7 +69,7 @@
     </div>
 
     <div v-if="platform !== 'darwin'" class="titlebar-menu">
-      <div v-for="item of menu" :key="item" class="titlebar-menu-item">
+      <div v-for="(item, key) in menu" :key="key" class="titlebar-menu-item">
         <button @click="item.click()">
           {{ item.label }}
         </button>
@@ -78,7 +78,7 @@
 
     <div v-if="platform !== 'darwin'" class="titlebar-buttons">
       <button
-        v-if="isMinimizable"
+        v-if="minimizable()"
         aria-label="minimize"
         title="Minimize"
         tabindex="-1"
@@ -89,7 +89,7 @@
         </svg>
       </button>
       <button
-        v-if="isMaximizable"
+        v-if="maximizable()"
         aria-label="maximize"
         title="Maximize"
         tabindex="-1"
@@ -100,7 +100,7 @@
         </svg>
       </button>
       <button
-        v-if="isClosable"
+        v-if="closable()"
         aria-label="close"
         title="Close"
         tabindex="-1"
@@ -120,43 +120,29 @@
 <script setup lang="ts">
 import { useElectron } from "../use/electron";
 
-const props = defineProps({
-  theme: {
-    type: String,
-    required: true,
-  },
-  platform: {
-    type: String,
-    required: true,
-  },
-  menu: {
-    type: Array as () => Array<unknown>,
-    default: () => Array,
-  },
-  isMinimizable: {
-    type: Boolean,
-    default: true,
-  },
-  isMaximizable: {
-    type: Boolean,
-    default: true,
-  },
-  isClosable: {
-    type: Boolean,
-    default: true,
-  },
-  showIcon: {
-    type: Boolean,
-    default: true,
-  },
-  showTitle: {
-    type: Boolean,
-    default: true,
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    theme: string;
+    platform: string;
+    menu: { label: string; click: () => void }[];
+    showIcon: boolean;
+    showTitle: boolean;
+  }>(),
+  {
+    theme: "light",
+    platform: "win32",
+    menu: () => [],
+    showIcon: true,
+    showTitle: true,
+  }
+);
 
-const { minimize, maximize, close } = useElectron();
+const { minimize, maximize, close, isMinimizable, isMaximizable, isClosable } =
+  useElectron();
 
+const minimizable = () => isMinimizable;
+const maximizable = () => isMaximizable;
+const closable = () => isClosable;
 const styleClass = `titlebar-style-${props.theme}`;
 const stylePlatform = `titlebar-platform-${props.platform}`;
 

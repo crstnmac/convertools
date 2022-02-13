@@ -33,10 +33,10 @@
     </div>
     <div class="page-footer">
       <bottom-bar
-        :theme="theme"
-        :platform="platform"
-        :show-title="showTitle"
-        :show-icon="showIcon"
+        :theme="props.theme"
+        :platform="props.platform"
+        :show-title="props.showTitle"
+        :show-icon="props.showIcon"
       />
     </div>
   </div>
@@ -47,9 +47,19 @@ import { useElectron } from "./use/electron";
 import AppNavigation from "/@/components/AppNavigation.vue";
 import TitleBar from "/@/components/TitleBar.vue";
 import BottomBar from "/@/components/FooterComponent.vue";
-import type { AppProps } from "@vue/runtime-core";
 
 const { isMinimizable, isMaximizable, isClosable } = useElectron();
+
+interface AppProps {
+  theme: string;
+  platform: string;
+  showTitle: boolean;
+  showIcon: boolean;
+  isMaximizable: () => boolean;
+  isMinimizable: () => boolean;
+  isClosable: () => boolean;
+  menu: { label: string; click: () => void }[];
+}
 
 const props: AppProps = {
   platform: "windows",

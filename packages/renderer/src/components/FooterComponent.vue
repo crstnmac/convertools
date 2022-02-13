@@ -11,28 +11,26 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  theme: {
-    type: String,
-    default: "light",
-  },
-  platform: {
-    type: String,
-    required: true,
-    default: "",
-  },
-  showIcon: {
-    type: Boolean,
-    default: true,
-  },
-  showTitle: {
-    type: Boolean,
-    default: true,
-  },
-});
+import type { Ref } from "vue";
+import { ref } from "vue";
 
-const styleClass = `footer-style-${props.theme}`;
-const stylePlatform = `footer-platform-${props.platform}`;
+const props = withDefaults(
+  defineProps<{
+    theme: string;
+    platform: string;
+    showIcon: boolean;
+    showTitle: boolean;
+  }>(),
+  {
+    theme: "dark",
+    platform: "windows",
+    showIcon: true,
+    showTitle: true,
+  }
+);
+
+const styleClass: Ref<string> = ref(`footer-style-${props.theme}`);
+const stylePlatform: Ref<string> = ref(`footer-platform-${props.platform}`);
 </script>
 <style lang="css">
 .footer {
